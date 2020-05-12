@@ -9,8 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  libv_markdown:
-    path: ../
+  libv_markdown: ^1.0.0
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
