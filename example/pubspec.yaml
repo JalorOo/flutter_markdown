@@ -1,4 +1,4 @@
-name: flutter_tex_example
+name: flutter_markdown_example
 description: A new Flutter project.
 
 version: 1.0.0+1
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_markdown:
+  libv_markdown:
     path: ../
   cupertino_icons: ^0.1.2
 

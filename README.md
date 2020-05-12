@@ -87,4 +87,4 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 - Please avoid using too many MarkdownViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause to slow down your app.
 
 ## Thanks to:
-- (flutter_tex)[https://github.com/shahxadakram/flutter_tex]
+- [flutter_tex](https://github.com/shahxadakram/flutter_tex)

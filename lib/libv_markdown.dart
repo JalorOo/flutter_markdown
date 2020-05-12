@@ -1,4 +1,4 @@
-library flutter_tex;
+library flutter_markdown;
 
 import 'dart:async';
 import 'dart:io';
@@ -52,7 +52,7 @@ class _MarkdownViewState extends State<MarkdownView> with AutomaticKeepAliveClie
   double _height = 1;
   String oldTeXHTML;
   String baseUrl =
-      "http://localhost:8080/packages/flutter_markdown/MathJax/markdown.html";
+      "http://localhost:8080/packages/libv_markdown/MathJax/markdown.html";
 
   @override
   void initState() {
