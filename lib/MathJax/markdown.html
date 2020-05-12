@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<head>
+    <meta charset="utf-8"/>
+    <!--Marked.Js的样式-->
+    <link rel="stylesheet" href="github-markdown.css"/>
+    <!--highlight.Js的样式-->
+    <link rel="stylesheet" href="tomorrow.css"/>
+    <!--导入资源-->
+    <script src="highlight.min.js"></script>
+    <script type="text/javascript" src="marked.js"></script>
+    <!--脚本运行-->
+    <script>
+        marked.setOptions({
+            renderer: new marked.Renderer(),
+            gfm: true,
+            tables: true,
+            breaks: true,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false,
+            highlight: function (code, lang) {
+                  if (lang && hljs.getLanguage(lang)) {
+                    return hljs.highlight(lang, code, true).value;
+                  } else {
+                    return hljs.highlightAuto(code).value;
+                  }
+              },
+
+        });
+    </script>
+
+    <style>
+        .MathJax_SVG:focus {
+            outline: none;
+        }
+    </style>
+
+    <script id="MathJaxConfig" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        showMathMenu:false,
+        delayStartupUntil: "configured",
+        tex2jax: {
+          ignoreClass: "tex2jax_ignore",
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        },
+
+          jax: ["input/TeX", "output/SVG"],
+          extensions: ["tex2jax.js", "MathEvents.js"],
+          TeX: {
+              extensions: ["mhchem.js","noErrors.js", "noUndefined.js", "autoload-all.js"],
+              noErrors: { disabled: true }
+
+          },
+          MathMenu: {
+              showRenderer: false
+          },
+          messageStyle: "none",
+          SVG: {
+              blacker: 0,
+              font: "Gyre-Pagella",
+              linebreaks: {
+                  automatic: true,
+                  width: "container"
+              },
+              scale: 90,
+              useFontCache: true,
+              useGlobalCache: true,
+              matchFontHeight: true
+
+          },
+      });
+
+    </script>
+
+    <script src="MathJax.js" type="text/javascript"></script>
+    <!--调用MathJax-->
+
+</head>
+<body>
+    <article id="content" class="markdown-body" style="text-align: left;"></article>
+</body>
+<script type="text/javascript">
+        <!--渲染Marked-->
+        var text = decodeURIComponent(location.search.split('teXHTML=')[1]);
+        document.getElementById('content').innerHTML = text;
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, text], function () {
+
+        });
+        var result = marked(text);
+		var element = document.getElementById('content');
+		element.innerHTML = result;
+		var height = document.getElementById('content').clientHeight;
+        RenderedWebViewHeight.postMessage(height);
+    </script>
+</html>
