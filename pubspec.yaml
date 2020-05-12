@@ -1,7 +1,7 @@
 name: libv_markdown
 description: A Flutter Package to render Markdown / Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/JalorOo/flutter_markdown
 
 environment:
