@@ -60,7 +60,7 @@ For **iOS** add following code in your `<project-directory>/ios/Runner/Info.plis
 **4:** Now in your Dart code, you can use:
 
 ```dart
-import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 ```
 
 **5:** Now you can use TeXHTML widget like this.
@@ -77,20 +77,14 @@ import 'package:flutter_tex/flutter_tex.dart';
               },
         )
 ```
-[Complete working application Example](https://github.com/shahxadakram/flutter_tex/tree/master/example)
+[Complete working application Example](https://github.com/jaloroo/flutter_markdown/tree/master/example)
 
 
 ## Known Issues:
 - A bit slow rendering speed. It takes 1-2 seconds to render after application loaded.
 
 ## Cautions:
-- Please avoid using too many TeXViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause to slow down your app.
+- Please avoid using too many MarkdownViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause to slow down your app.
 
-
-# Screenshots
-
-Screenshot# 01             |  Screenshot# 02
-:-------------------------:|:-------------------------:
-<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/Screenshot_1.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/Screenshot_2.png"/>
-
-[![Tweet Flutter_TeX](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=A%20Flutter%20Package%20to%20render%20Mathematics%2C%20Physics%20and%20Chemistry%20Equations%20based%20on%20LaTeX%20with%20full%20HTML%20support.&url=https://github.com/shahzadakram67/flutter_tex&via=shahzadakram67&hashtags=flutter,flutter_tex,latex,equations)
+## Thanks to:
+- (flutter_tex)[https://github.com/shahxadakram/flutter_tex]
