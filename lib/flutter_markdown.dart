@@ -52,7 +52,7 @@ class _MarkdownViewState extends State<MarkdownView> with AutomaticKeepAliveClie
   double _height = 1;
   String oldTeXHTML;
   String baseUrl =
-      "http://localhost:8080/packages/flutter_tex/MathJax/markdown.html";
+      "http://localhost:8080/packages/flutter_markdown/MathJax/markdown.html";
 
   @override
   void initState() {

@@ -20,7 +20,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^1.0.14
+  flutter_markdown: ^1.0.0
 ```
 
 **2:** You can install packages from the command line:
