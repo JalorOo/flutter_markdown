@@ -1,10 +1,10 @@
-# Flutter Markdown
+# Flutter Markdown Library
 
-A Flutter Package to render so many types of equations based on **Markdown/LaTeX**, most commonly used are as followings:
+A Flutter Package to render Markdown , including:
 
-- **Mathematics / Maths Equations** (Algebra, Calculus, Geometry, Geometry etc...)
+- **LateX(MathPart**
 
-- **Code Highlight**
+- **Highlight Code**
 
 - It also includes full **HTML** with **JavaScript** support.
 
@@ -20,7 +20,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  libv_markdown: ^1.0.0
+  libv_markdown: ^1.0.1
 ```
 
 **2:** You can install packages from the command line:
@@ -60,13 +60,15 @@ For **iOS** add following code in your `<project-directory>/ios/Runner/Info.plis
 **4:** Now in your Dart code, you can use:
 
 ```dart
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:libv_markdown/libv_markdown.dart';
 ```
 
-**5:** Now you can use TeXHTML widget like this.
+**5:** Now you can use markdownViewHTML widget like this.
 ```dart
     markdownView(
-          markdownViewHTML: r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """,
+          markdownViewHTML: r"""
+          **Hello**, $sin^2x+cos^2x=1$
+          """,
 
           onRenderFinished: (height) {
                 print("Widget Height is : $height")
@@ -84,7 +86,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 - A bit slow rendering speed. It takes 1-2 seconds to render after application loaded.
 
 ## Cautions:
-- Please avoid using too many MarkdownViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause to slow down your app.
+- Please avoid using too many markdownViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause to slow down your app.
 
-## Thanks to:
+## Thanks :
 - [flutter_tex](https://github.com/shahxadakram/flutter_tex)

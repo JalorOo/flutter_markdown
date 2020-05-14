@@ -77,13 +77,18 @@ class _FlutterTeXState extends State<FlutterTeX> {
 String teXHTML = r"""
 $$sin^2x+cos^2x=1$$
 $sin^2x+cos^2x=1$
-# Flutter Markdown
+A Flutter Package to render Markdown , including:
 
-A Flutter Package to render so many types of equations based on **Markdown/LaTeX**, most commonly used are as followings:
+- **LateX(MathPart**
 
-- **Mathematics / Maths Equations** (Algebra, Calculus, Geometry, Geometry etc...)
+- **Highlight Code**
 
-- **Physics Equations**
+- It also includes full **HTML** with **JavaScript** support.
 
-- **Flutter**
+Rendering of equations depends on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) a JavaScript library.
+
+This package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin.
+
+can render text :$sin^2x+cos^2x=1$
+$$sin^2x+cos^2x=1$$
    """;
