@@ -12,30 +12,30 @@ import 'package:webview_flutter/webview_flutter.dart';
 ///A Flutter Widget to render Markdown,  based on Markdown/LaTeX with full HTML 、Markdown and JavaScript support.
 ///
 class MarkdownView extends StatefulWidget {
-  final Key key;
+  final Key? key;
 
   ///Raw String containing HTML and Markdown Code e.g. String textHTML = r"""**Hello**"""
   @required
-  final String markdownViewHTML;
+  final String? markdownViewHTML;
 
   /// Fixed Height for markdownViewHTML.
-  final double height;
+  final double? height;
 
   /// Show a loading widget before rendering completes.
-  final Widget loadingWidget;
+  final Widget? loadingWidget;
 
   /// Callback when Markdown rendering finishes.
-  final Function(double height) onRenderFinished;
+  final Function(double height)? onRenderFinished;
 
   /// Callback when markdownViewHTML loading finishes.
-  final Function(String message) onPageFinished;
+  final Function(String message)? onPageFinished;
 
   /// Keep widget Alive. (True by default).
-  final bool keepAlive;
+  final bool? keepAlive;
 
   MarkdownView(
       {this.key,
-      this.markdownViewHTML,
+      required this.markdownViewHTML,
       this.height,
       this.loadingWidget,
       this.keepAlive,
@@ -47,10 +47,9 @@ class MarkdownView extends StatefulWidget {
 }
 
 class _MarkdownViewState extends State<MarkdownView> with AutomaticKeepAliveClientMixin {
-  WebViewController _webViewController;
+  late WebViewController _webViewController;
   _Server _server = _Server();
   double _height = 1;
-  String oldTeXHTML;
   String baseUrl =
       "http://localhost:8080/packages/libv_markdown/MathJax/markdown.html";
 
@@ -68,12 +67,6 @@ class _MarkdownViewState extends State<MarkdownView> with AutomaticKeepAliveClie
     super.build(context);
     updateKeepAlive();
 
-    if (_webViewController != null && widget.markdownViewHTML != oldTeXHTML) {
-      _webViewController
-          .loadUrl("$baseUrl?teXHTML=${Uri.encodeComponent(widget.markdownViewHTML)}");
-      this.oldTeXHTML = widget.markdownViewHTML;
-    }
-
     return IndexedStack(
       index: _height == 1 ? 1 : 0,
       children: <Widget>[
@@ -83,13 +76,13 @@ class _MarkdownViewState extends State<MarkdownView> with AutomaticKeepAliveClie
             key: widget.key,
             onPageFinished: (message) {
               if (widget.onPageFinished != null) {
-                widget.onPageFinished(message);
+                widget.onPageFinished!(message);
               }
             },
             onWebViewCreated: (controller) {
               _webViewController = controller;
               _webViewController.loadUrl(
-                  "$baseUrl?teXHTML=${Uri.encodeComponent(widget.markdownViewHTML)}");
+                  "$baseUrl?teXHTML=${Uri.encodeComponent(widget.markdownViewHTML!)}");
             },
             javascriptChannels: Set.from([
               JavascriptChannel(
@@ -98,12 +91,13 @@ class _MarkdownViewState extends State<MarkdownView> with AutomaticKeepAliveClie
                     double viewHeight = double.parse(message.message) + 20;
 
                     if (_height != viewHeight) {
+                      // print(viewHeight);
                       setState(() {
                         _height = viewHeight;
                       });
                     }
                     if (widget.onRenderFinished != null) {
-                      widget.onRenderFinished(_height);
+                      widget.onRenderFinished!(_height);
                     }
                   })
             ]),
@@ -138,13 +132,13 @@ class _MarkdownViewState extends State<MarkdownView> with AutomaticKeepAliveClie
 class _Server {
   // class from inAppBrowser
 
-  HttpServer _server;
+  HttpServer? _server;
   int _port = 8080;
 
   ///Closes the server.
   Future<void> close() async {
     if (this._server != null) {
-      await this._server.close(force: true);
+      await this._server!.close(force: true);
       print('Server running on http://localhost:$_port closed');
       this._server = null;
     }
@@ -160,14 +154,14 @@ class _Server {
 
     runZoned(() {
       HttpServer.bind('127.0.0.1', _port, shared: true).then((server) {
-        print('Server running on http://localhost:' + _port.toString());
+        // print('Server running on http://localhost:' + _port.toString());
 
         this._server = server;
 
         server.listen((HttpRequest request) async {
-          var body = List<int>();
+          var body;
           var path = request.requestedUri.path;
-          print("path:"+path);
+          // print("path:"+path);
           path = (path.startsWith('/')) ? path.substring(1) : path;
           path += (path.endsWith('/')) ? 'markdown.html' : '';
 
@@ -195,7 +189,7 @@ class _Server {
         });
         completer.complete();
       });
-    }, onError: (e, stackTrace) => print('Error: $e $stackTrace'));
+    });
     return completer.future;
   }
 }
