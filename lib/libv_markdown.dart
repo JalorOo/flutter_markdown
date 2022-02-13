@@ -3,6 +3,8 @@ library flutter_markdown;
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -33,6 +35,12 @@ class MarkdownView extends StatefulWidget {
   /// Keep widget Alive. (True by default).
   final bool? keepAlive;
 
+  /// It is possible for other gesture recognizers to be competing with the web view on pointer
+  /// events, e.g if the web view is inside a [ListView] the [ListView] will want to handle
+  /// vertical drags. The web view will claim gestures that are recognized by any of the
+  /// recognizers on this list.
+  final bool onlyVerticalScroll;
+
   MarkdownView(
       {this.key,
       required this.markdownViewHTML,
@@ -40,13 +48,15 @@ class MarkdownView extends StatefulWidget {
       this.loadingWidget,
       this.keepAlive,
       this.onRenderFinished,
-      this.onPageFinished});
+      this.onPageFinished,
+      this.onlyVerticalScroll = false});
 
   @override
   _MarkdownViewState createState() => _MarkdownViewState();
 }
 
-class _MarkdownViewState extends State<MarkdownView> with AutomaticKeepAliveClientMixin {
+class _MarkdownViewState extends State<MarkdownView>
+    with AutomaticKeepAliveClientMixin {
   late WebViewController _webViewController;
   _Server _server = _Server();
   double _height = 1;
@@ -73,6 +83,9 @@ class _MarkdownViewState extends State<MarkdownView> with AutomaticKeepAliveClie
         SizedBox(
           height: widget.height ?? _height,
           child: WebView(
+            gestureRecognizers: widget.onlyVerticalScroll
+                ? [Factory(() => VerticalDragGestureRecognizer())].toSet()
+                : null,
             key: widget.key,
             onPageFinished: (message) {
               if (widget.onPageFinished != null) {
