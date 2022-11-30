@@ -57,13 +57,12 @@ class _FlutterTeXState extends State<FlutterTeX> {
               ),
             ),
             Container(
+              color:Colors.transparent,
               margin: EdgeInsets.all(10),
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: MarkdownView(
-                    markdownViewHTML: _teXHTMLEditingController.text,
-                  ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: MarkdownView(
+                  markdownViewHTML: _teXHTMLEditingController.text,
                 ),
               ),
             ),

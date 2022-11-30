@@ -35,6 +35,12 @@ class MarkdownView extends StatefulWidget {
   /// Keep widget Alive. (True by default).
   final bool? keepAlive;
 
+  /// set[MarkdownView]'s background color
+  final Color backgroundColor;
+
+  /// set the [theme] light or dark
+  final String theme;
+
   /// It is possible for other gesture recognizers to be competing with the web view on pointer
   /// events, e.g if the web view is inside a [ListView] the [ListView] will want to handle
   /// vertical drags. The web view will claim gestures that are recognized by any of the
@@ -45,6 +51,8 @@ class MarkdownView extends StatefulWidget {
       {this.key,
       required this.markdownViewHTML,
       this.height,
+      this.backgroundColor = Colors.transparent,
+      this.theme = "dark",
       this.loadingWidget,
       this.keepAlive,
       this.onRenderFinished,
@@ -60,11 +68,11 @@ class _MarkdownViewState extends State<MarkdownView>
   late WebViewController _webViewController;
   _Server _server = _Server();
   double _height = 1;
-  String baseUrl =
-      "http://localhost:8080/packages/libv_markdown/MathJax/markdown.html";
+  String? baseUrl;
 
   @override
   void initState() {
+    baseUrl = "http://localhost:8080/packages/libv_markdown/MathJax/markdown_${widget.theme}.html";
     _server.start();
     super.initState();
   }
@@ -83,6 +91,7 @@ class _MarkdownViewState extends State<MarkdownView>
         SizedBox(
           height: widget.height ?? _height,
           child: WebView(
+            backgroundColor: widget.backgroundColor,
             gestureRecognizers: widget.onlyVerticalScroll
                 ? [Factory(() => VerticalDragGestureRecognizer())].toSet()
                 : null,
@@ -95,7 +104,7 @@ class _MarkdownViewState extends State<MarkdownView>
             onWebViewCreated: (controller) {
               _webViewController = controller;
               _webViewController.loadUrl(
-                  "$baseUrl?teXHTML=${Uri.encodeComponent(widget.markdownViewHTML!)}");
+                  "${baseUrl!}?teXHTML=${Uri.encodeComponent(widget.markdownViewHTML!)}");
             },
             javascriptChannels: Set.from([
               JavascriptChannel(
@@ -176,7 +185,7 @@ class _Server {
           var path = request.requestedUri.path;
           // print("path:"+path);
           path = (path.startsWith('/')) ? path.substring(1) : path;
-          path += (path.endsWith('/')) ? 'markdown.html' : '';
+          path += (path.endsWith('/')) ? 'markdown_dark.html' : '';
 
           try {
             body = (await rootBundle.load(path)).buffer.asUint8List();

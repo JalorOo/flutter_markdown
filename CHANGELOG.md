@@ -1,5 +1,9 @@
 # Change Logs
 
+## [1.0.5]
+
+Support backgroundColor and textColor
+
 ## [1.0.3]
 
 Update the library SDK version, support null safety

@@ -2,7 +2,7 @@
 
 A Flutter Package to render Markdown , including:
 
-- **LateX(MathPart**
+- **LateX(MathPart)**
 
 - **Highlight Code**
 
@@ -20,7 +20,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  libv_markdown: ^1.0.3
+  libv_markdown: ^1.0.5
 ```
 
 **2:** You can install packages from the command line:
